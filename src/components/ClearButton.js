@@ -3,7 +3,7 @@ import React from 'react'
 function ClearButton({clearOnClick}) {
   return (
     <div>
-        <button onClick={clearOnClick}>AC</button>
+        <button className='clear-button button' onClick={clearOnClick}>AC</button>
     </div>
   )
 }
