@@ -1,8 +1,14 @@
 .calculator {
-    border: 3px solid red;
+    border: 5px solid black;
+    border-radius: 5px;
     width: 200px;
     display: flex;
     flex-wrap: wrap;
+    margin: 5px;
+}
+
+* {
+    font-size: 25px;
 }
 
 .number-button {
@@ -13,6 +19,7 @@
     height: 50px;
     color: red;
     width: 50px;
+    border: 1px solid white;
 }
 
 .row {
@@ -20,9 +27,21 @@
 }
 
 .clear-button.button {
+    background-color: rgb(188, 187, 187);
     width: 150px;
 }
 
 .number-button.button.number-0{
     width: 150px;
+}
+
+.display {
+    border: 1px solid black;
+    /* border-radius: 5px; */
+    height: 50px;
+    width: 200px;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-end;
+    font-size: 45px;
 }
