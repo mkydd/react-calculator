@@ -99,34 +99,35 @@ function Calculator() {
 
   return (
     <div className='calculator'>
+      <style> backgroundColor: red;</style>
       <div className="row">
         <Display value1={value1} value2={value2} operation={operation} output={output}/>
       </div>
 
       <div className="row">
         <ClearButton clearOnClick={clearOnClick}/>
-        <OperationButton operation='/' operationOnClick={operationOnClick}/> 
+        <OperationButton operation='/' operationOnClick={operationOnClick} curr_operation={operation}/> 
       </div>
         
         <div className="row">
           <NumberButton number='7' numberOnClick={numberOnClick}/>
           <NumberButton number='8' numberOnClick={numberOnClick}/>
           <NumberButton number='9' numberOnClick={numberOnClick}/>
-          <OperationButton operation='*' operationOnClick={operationOnClick}/>
+          <OperationButton operation='*' operationOnClick={operationOnClick} curr_operation={operation}/>
         </div>
 
         <div className="row">
           <NumberButton number='4' numberOnClick={numberOnClick}/>
           <NumberButton number='5' numberOnClick={numberOnClick}/>
           <NumberButton number='6' numberOnClick={numberOnClick}/>
-          <OperationButton operation='-' operationOnClick={operationOnClick}/>
+          <OperationButton operation='-' operationOnClick={operationOnClick} curr_operation={operation}/>
         </div>
 
         <div className="row">
           <NumberButton number='1' numberOnClick={numberOnClick}/>
           <NumberButton number='2' numberOnClick={numberOnClick}/>
           <NumberButton number='3' numberOnClick={numberOnClick}/>
-          <OperationButton operation='+' operationOnClick={operationOnClick}/>
+          <OperationButton operation='+' operationOnClick={operationOnClick} curr_operation={operation}/>
         </div>
 
         <div className="row">

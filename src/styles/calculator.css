@@ -22,6 +22,25 @@
     border: 1px solid white;
 }
 
+.operation-button {
+    background-color: rgba(255, 0, 0, 0.818);
+    color: white;
+}
+
+.decimal-button {
+    background-color: black;
+    color: red;
+}
+
+.equal-button {
+    background-color: rgb(255, 0, 0, 0.818);
+    color: white;
+}
+
+.button:hover {
+    opacity: 80%;
+}
+
 .row {
     display: flex;
 }
