@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react'
 import NumberButton from './NumberButton'
-// import Display from './Display'
 import OperationButton from './OperationButton'
 import EqualButton from './EqualButton'
 import ClearButton from './ClearButton'
 import Display from './Display'
+import DecimalButton from './DecimalButton'
 import '../styles/calculator.css'
 
 function Calculator() {
@@ -12,6 +12,8 @@ function Calculator() {
   const [value2, setValue2] = useState('')
   const [operation, setOperation] = useState('')
   const [output, setOuput] = useState('')
+  const [decimal1, setDecimal1] = useState(false)
+  const [decimal2, setDecimal2] = useState(false)
 
   const hasPageRendered = useRef(false)
 
@@ -25,41 +27,55 @@ function Calculator() {
     hasPageRendered.current = true
   }, [output])
 
-
-
-  function numberOnClick(number) {
-    if (value1.length === 0) {
-      console.log('value1 + number =', value1 + number)
-      setValue1(value1 + number)
+  function numberOnClick(value) {
+    // console.log('value1.length =', value1.length)
+    if (!operation) {
+      if (value === '.' && !decimal1) {
+        setValue1(value1 + value)
+        setDecimal1(true)
+      } else if (value !== '.') {
+        console.log('value1 + number =', value1 + value)
+        setValue1(value1 + value)
+      }
     } else {
-      console.log('value2 + number =', value2 + number)
-      setValue2(value2 + number)
+      if (value === '.' && !decimal2) {
+        setValue2(value2 + value)
+        setDecimal2(true)
+      } else if (value !== '.') {
+        console.log('value2 + number =', value2 + value)
+        setValue2(value2 + value)
+      }
     }
   }
 
   function operationOnClick(operation) {
-      if (value1) {setOperation(operation)}
+    if (value1) {
+      setOperation(operation)
+      console.log('operation =', operation)
+    }
   }
 
   function equalOnClick(value1, value2, operation) {
-    const num1 = parseInt(value1)
-    const num2 = parseInt(value2)
+    const num1 = parseFloat(value1)
+    const num2 = parseFloat(value2)
+
+    console.log(`num1: ${num1} and num2: ${num2}`)
 
     switch (operation) {
       case '+':
-        setOuput((num1 + num2).toString())
+        decimal1 | decimal2 ? setOuput((num1 + num2).toFixed(4).toString()) : setOuput((num1 + num2).toString())
         break;
       case '-':
-        setOuput((num1 - num2).toString())
+        decimal1 | decimal2 ? setOuput((num1 - num2).toFixed(4).toString()) : setOuput((num1 - num2).toString())
         break;
       case '*':
-        setOuput((num1 * num2).toString())
+        decimal1 | decimal2 ? setOuput((num1 * num2).toFixed(4).toString()) : setOuput((num1 * num2).toString())
         break;
       case '/':
         if (num2 === 0){ 
           clearOnClick()
         } else {
-          setOuput((num1 / num2).toString())
+          decimal1 | decimal2 ? setOuput((num1 / num2).toFixed(4).toString()) : setOuput((num1 / num2).toString())
         }
         break;
       default:
@@ -67,12 +83,16 @@ function Calculator() {
     }
 
     setValue2('')
+    setDecimal1(decimal2)
+    setDecimal2(false)
     setOperation('')
   }
 
   function clearOnClick() {
     setValue1('')
     setValue2('')
+    setDecimal1(false)
+    setDecimal1(false)
     setOperation('')
     setOuput('')
   }
@@ -111,6 +131,7 @@ function Calculator() {
 
         <div className="row">
           <NumberButton number='0' numberOnClick={numberOnClick}/>
+          <DecimalButton onClick={numberOnClick}/>
           <EqualButton operation={operation} value1={value1} value2={value2} equalOnClick={equalOnClick}/>
         </div>
     </div>
